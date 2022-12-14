@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 import styles from "./styles.module.scss";
 import Pagination from "@mui/material/Pagination";
 import Image from "next/image";
-import * as api_actions from "../services/postsCrud";
+import * as api_actions from "../services/post.service";
 import React, { useEffect } from "react";
 import { useRouter } from 'next/router';
 
@@ -37,7 +37,7 @@ export default function Home() {
     },[router.query])
 
 
-    const handlePaginationChange = (e:any,page:number)=>{
+    const handlePaginationChange = (_e:any,page:number)=>{
       setpage(page);
       router.query.page = page.toString();
       router.push(router)
