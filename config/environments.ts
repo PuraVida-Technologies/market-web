@@ -1,11 +1,16 @@
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
+
+
 const environments = {
     app: {        
-        nodeEnv: process.env.NODE_ENV,
+        nodeEnv: publicRuntimeConfig.NEXT_PUBLIC_NODE_ENV,
     },
     provider: {
-        baseUrl: process.env.ENDPOINT_BASE_URL || '',
+        baseUrl: publicRuntimeConfig.NEXT_PUBLIC_BASE_URL,
     },
-    mapApiKey: process.env.MAP_API_KEY || ''
+    mapApiKey: publicRuntimeConfig.NEXT_PUBLIC_MAP_API_KEY
 }
 
 export default environments

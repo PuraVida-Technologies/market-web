@@ -28,7 +28,7 @@
     "strict": true,
     "target": "es5",
   },
-  "include": ["next-env.d.ts","environments.d", "**/*.ts", "**/*.tsx", "types/*.d.ts"],
+  "include": ["environment.d.ts","next-env.d.ts", "**/*.ts", "**/*.tsx", "types/*.d.ts", "src/HOC/withAuth.js", "src/HOC/loggedIn.tsx"],
   "exclude": ["node_modules"],
   "parserOptions":  {
     "ecmaVersion":  "2020",
