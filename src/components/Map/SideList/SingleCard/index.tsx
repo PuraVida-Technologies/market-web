@@ -3,13 +3,7 @@ import { CardType } from "@/types/Card";
 import Rating from "@mui/material/Rating";
 import styles from "./styles.module.scss";
 
-const SingleCard = ({
-  activeCard,
-  setActiveCard,
-}: {
-  activeCard: CardType;
-  setActiveCard: (card: null) => void;
-}) => {
+const SingleCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setActiveCard: (card: null) => void }) => {
   const { name, address, openHours, rating, location } = activeCard;
 
   return (
@@ -57,18 +51,10 @@ const SingleCard = ({
         <div className={styles.stars}>
           {rating && (
             <div className={styles.rating}>
-              <Rating
-                name="read-only"
-                precision={0.5}
-                value={rating}
-                readOnly
-              />
+              <Rating name="read-only" precision={0.5} value={rating} readOnly />
             </div>
           )}
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in
-            mollis eros.
-          </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros.</p>
         </div>
         <div className={styles.specs}>
           <div>
@@ -83,9 +69,8 @@ const SingleCard = ({
         <div className={styles.description}>
           <h4>Description</h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in
-            mollis eros. Cras at malesuada lectus. Fusce ac massa nec nunc
-            consectetur convallis.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros. Cras at malesuada lectus.
+            Fusce ac massa nec nunc consectetur convallis.
           </p>
         </div>
       </div>

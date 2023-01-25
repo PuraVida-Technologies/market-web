@@ -5,13 +5,7 @@ import Marker from "./Marker";
 import { SideList } from "./SideList";
 import environments from "@/config/environments";
 
-const Map = ({
-  cards,
-  sideListTopMargin,
-}: {
-  cards: CardType[];
-  sideListTopMargin: number;
-}) => {
+const Map = ({ cards, sideListTopMargin }: { cards: CardType[]; sideListTopMargin: number }) => {
   const [activeMarker, setActiveMarker] = useState<string>("");
   const [center, setCenter] = useState({ lat: 25.12457, lng: 20.12457 });
   const [activeCard, setActiveCard] = useState<CardType | null>(null);

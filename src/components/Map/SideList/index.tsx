@@ -84,10 +84,7 @@ export const SideList = ({
             </div>
             <div className={styles.sideCardsContainer}>
               {cards?.map((card, i) => (
-                <ListCard
-                  key={`${card.address}-${i}`}
-                  {...{ card, setActiveCard }}
-                />
+                <ListCard key={`${card.address}-${i}`} {...{ card, setActiveCard }} />
               ))}
             </div>
           </>
@@ -95,9 +92,7 @@ export const SideList = ({
       </div>
       {activeCard ? (
         <div
-          className={`${styles.sideList} ${
-            activeCard && styles.noBorderPadding
-          } ${styles.mobileSingleCard}`}
+          className={`${styles.sideList} ${activeCard && styles.noBorderPadding} ${styles.mobileSingleCard}`}
           style={{ top: `${sideListTopMargin}px` }}
         >
           <SingleCard {...{ activeCard, setActiveCard }} />
@@ -106,10 +101,7 @@ export const SideList = ({
         <div className={`bottomSliderList ${styles.bottomSliderList}`}>
           <Slider {...settings}>
             {cards?.map((card, i) => (
-              <ListCard
-                key={`${card.address}-${i}`}
-                {...{ card, setActiveCard }}
-              />
+              <ListCard key={`${card.address}-${i}`} {...{ card, setActiveCard }} />
             ))}
           </Slider>
         </div>

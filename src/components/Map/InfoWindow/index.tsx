@@ -28,23 +28,12 @@ const InfoWindow = ({
       <div className={styles.infoContainer}>
         <h4>{name}</h4>
         <div className={styles.address}>
-          <Image
-            src="/assets/icons/addressArrow.svg"
-            width={10}
-            height={10}
-            alt="distance"
-          />
+          <Image src="/assets/icons/addressArrow.svg" width={10} height={10} alt="distance" />
           <span>{distance}</span>
         </div>
         {rating && (
           <div className={styles.rating}>
-            <Rating
-              size="small"
-              name="read-only"
-              precision={0.5}
-              value={rating}
-              readOnly
-            />
+            <Rating size="small" name="read-only" precision={0.5} value={rating} readOnly />
           </div>
         )}
         <div className={styles.content}>
@@ -57,22 +46,12 @@ const InfoWindow = ({
               target="_blank"
               rel="noreferrer"
             >
-              <Image
-                src="/assets/icons/send.svg"
-                width={11}
-                height={14}
-                alt="direction"
-              />
+              <Image src="/assets/icons/send.svg" width={11} height={14} alt="direction" />
               <span>Direction</span>
             </a>
           </button>
           <button>
-            <Image
-              src="/assets/icons/shape.svg"
-              width={8}
-              height={12}
-              alt="save"
-            />
+            <Image src="/assets/icons/shape.svg" width={8} height={12} alt="save" />
             <span>Save</span>
           </button>
         </div>
