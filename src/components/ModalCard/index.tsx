@@ -4,23 +4,13 @@ import Rating from "@mui/material/Rating";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./styles.module.scss";
 
-const ModalCard = ({
-  activeCard,
-  setActiveCard,
-}: {
-  activeCard: CardType;
-  setActiveCard: (card: null) => void;
-}) => {
+const ModalCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setActiveCard: (card: null) => void }) => {
   const { name, address, openHours, rating, location } = activeCard;
 
   return (
     <div className={styles.singleCard}>
       <div className={styles.imageContainer}>
-        <CloseIcon
-          onClick={() => setActiveCard(null)}
-          className={styles.closeBtn}
-          fontSize="small"
-        />
+        <CloseIcon onClick={() => setActiveCard(null)} className={styles.closeBtn} fontSize="small" />
         {/* <Image
           onClick={() => setActiveCard(null)}
           src="/assets/icons/sideCardBack.svg"
@@ -63,18 +53,10 @@ const ModalCard = ({
         <div className={styles.stars}>
           {rating && (
             <div className={styles.rating}>
-              <Rating
-                name="read-only"
-                precision={0.5}
-                value={rating}
-                readOnly
-              />
+              <Rating name="read-only" precision={0.5} value={rating} readOnly />
             </div>
           )}
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in
-            mollis eros.
-          </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros.</p>
         </div>
         <div className={styles.specs}>
           <div>
@@ -89,9 +71,8 @@ const ModalCard = ({
         <div className={styles.description}>
           <h4>Description</h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in
-            mollis eros. Cras at malesuada lectus. Fusce ac massa nec nunc
-            consectetur convallis.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros. Cras at malesuada lectus.
+            Fusce ac massa nec nunc consectetur convallis.
           </p>
         </div>
       </div>

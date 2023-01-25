@@ -2,13 +2,7 @@ import Image from "next/image";
 import { CardType } from "@/types/Card";
 import styles from "./styles.module.scss";
 
-const ListCard = ({
-  card,
-  setActiveCard,
-}: {
-  card: CardType;
-  setActiveCard: (card: CardType) => void;
-}) => {
+const ListCard = ({ card, setActiveCard }: { card: CardType; setActiveCard: (card: CardType) => void }) => {
   const { distance, name, location } = card;
 
   return (
@@ -19,12 +13,7 @@ const ListCard = ({
       <div className={styles.infoContainer}>
         <h4>{name}</h4>
         <div className={styles.address}>
-          <Image
-            src="/assets/icons/addressArrow.svg"
-            width={10}
-            height={10}
-            alt="distance"
-          />
+          <Image src="/assets/icons/addressArrow.svg" width={10} height={10} alt="distance" />
           <span>{distance}</span>
         </div>
         <div className={styles.review}></div>
@@ -38,22 +27,12 @@ const ListCard = ({
               target="_blank"
               rel="noreferrer"
             >
-              <Image
-                src="/assets/icons/send.svg"
-                width={11}
-                height={14}
-                alt="direction"
-              />
+              <Image src="/assets/icons/send.svg" width={11} height={14} alt="direction" />
               <span>Direction</span>
             </a>
           </button>
           <button onClick={(e) => e.stopPropagation()}>
-            <Image
-              src="/assets/icons/shape.svg"
-              width={8}
-              height={12}
-              alt="save"
-            />
+            <Image src="/assets/icons/shape.svg" width={8} height={12} alt="save" />
             <span>Save</span>
           </button>
         </div>

@@ -22,12 +22,8 @@ type ITag = {
   slug: string;
 };
 
-const Tag = ({ slug, name, icon, onClick, selectedTags }: TagProps) => (
-  <div
-    className={`${styles.tag} ${selectedTags.includes(slug) && styles.active}`}
-    onClick={onClick}
-  >
-    <img src={icon} alt="logo" />
+const Tag = ({ slug, name, onClick, selectedTags }: TagProps) => (
+  <div className={`${styles.tag} ${selectedTags.includes(slug) && styles.active}`} onClick={onClick}>
     <p data-text={name}>{name}</p>
   </div>
 );
@@ -37,35 +33,36 @@ type TagsSliderProps = {
   setSelectedTags: (searchText: string[]) => void;
 };
 
-const TagSlider = forwardRef<HTMLInputElement, TagsSliderProps>(
-  ({ selectedTags, setSelectedTags }, ref) => {
-    const { data } = useSWR("tags", getMarketplaceTags());
-    const router = useRouter();
-    const handleTagChange = (slug: string) => {
-      let searchTags = router.query["tagsSlugs[]"]
-        ? Array.isArray(router.query["tagsSlugs[]"])
-          ? router.query["tagsSlugs[]"]
-          : [router.query["tagsSlugs[]"]]
-        : [];
-      if (slug) {
-        if (selectedTags.includes(slug)) {
-          const index = searchTags.indexOf(slug);
-          if (index > -1) {
-            searchTags.splice(index, 1);
-          }
-        } else {
-          searchTags.push(slug);
+const TagSlider = forwardRef<HTMLInputElement, TagsSliderProps>(({ selectedTags, setSelectedTags }, ref) => {
+  const { data } = useSWR("tags", getMarketplaceTags());
+  const router = useRouter();
+  const handleTagChange = (slug: string) => {
+    const searchTags = router.query["tagsSlugs[]"]
+      ? Array.isArray(router.query["tagsSlugs[]"])
+        ? router.query["tagsSlugs[]"]
+        : [router.query["tagsSlugs[]"]]
+      : [];
+    if (slug) {
+      if (selectedTags.includes(slug)) {
+        const index = searchTags.indexOf(slug);
+        if (index > -1) {
+          searchTags.splice(index, 1);
         }
+      } else {
+        searchTags.push(slug);
       }
-      setSelectedTags(searchTags);
-      router.query["tagsSlugs[]"] = searchTags;
-      router.push(router);
-    };
+    }
+    setSelectedTags(searchTags);
+    router.query["tagsSlugs[]"] = searchTags;
+    router.push(router);
+  };
 
-    let tagsData = data && data.tags ? data.tags : [];
-    return (
-      <div ref={ref} className={styles.tagsSlider}>
-        <div className="container">
+  const tagsData = data && data.tags ? data.tags : [];
+  return (
+    <div ref={ref} className={styles.tagsSlider}>
+      <div className="container">
+        {selectedTags.length ? <span className={styles.badge}>{selectedTags.length}</span> : null}
+        <div className={styles.tagsInnerContainer}>
           {tagsData.map((tag: ITag) => (
             <Tag
               key={tag._id}
@@ -77,9 +74,9 @@ const TagSlider = forwardRef<HTMLInputElement, TagsSliderProps>(
           ))}
         </div>
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 
 TagSlider.displayName = "TagSlider";
 

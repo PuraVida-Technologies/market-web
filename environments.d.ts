@@ -1,8 +1,9 @@
 declare global {
     namespace NodeJS {
       interface ProcessEnv {
-        ENDPOINT_BASE_URL: string;
-        NODE_ENV: string;
+        NEXT_PUBLIC_NODE_ENV: string;
+        NEXT_PUBLIC_BASE_URL: string;
+        NEXT_PUBLIC_MAP_API_KEY: string;
       }
     }
   }

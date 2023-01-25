@@ -13,6 +13,7 @@ import { CardType } from "@/types/Card";
 import Header from "next/head";
 import Modal from "@mui/material/Modal";
 import ModalCard from "@/components/ModalCard";
+import { GetServerSideProps } from "next/types";
 
 enum Views {
   LIST_VIEW = "list-view",
@@ -80,7 +81,7 @@ export default function Home() {
 
   useEffect(() => {
     const { view, page, text } = router.query;
-    let filterState: FilterState = {
+    const filterState: FilterState = {
       page: 1,
       searchText: "",
       selectedTags: [],
@@ -106,10 +107,7 @@ export default function Home() {
     setFilterState(filterState);
   }, [router]);
 
-  const handlePaginationChange = (
-    _event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handlePaginationChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setFilterState((filterState) => ({ ...filterState, page: value }));
     router.query.page = `${value}`;
     router.push(router);
@@ -133,21 +131,11 @@ export default function Home() {
         </Grid>
         <Modal open={Boolean(activeCard)} onClose={handleClose}>
           <>
-            <ModalCard
-              activeCard={activeCard as CardType}
-              setActiveCard={setActiveCard}
-            />
+            <ModalCard activeCard={activeCard as CardType} setActiveCard={setActiveCard} />
           </>
         </Modal>
         {data?.data?.map((card: CardType, i: number) => (
-          <Grid
-            item
-            key={`${card.address}-${i}`}
-            xs={6}
-            sm={4}
-            md={3}
-            className={styles.cardContainer}
-          >
+          <Grid item key={`${card.address}-${i}`} xs={6} sm={4} md={3} className={styles.cardContainer}>
             <Card {...{ card, setActiveCard }} />
           </Grid>
         ))}
@@ -158,8 +146,7 @@ export default function Home() {
             </div>
             <p className={styles.noRes}>No Result Found!</p>
             <p className={styles.couldNotFind}>
-              We couldn’t find the result you’re looking for? Be sure to check
-              your spelling.
+              We couldn’t find the result you’re looking for? Be sure to check your spelling.
             </p>
           </div>
         ) : (
@@ -167,7 +154,7 @@ export default function Home() {
             <Pagination
               onChange={handlePaginationChange}
               page={filterState.page}
-              count={data?.pagination?.numberOfPages}
+              count={data?.pagination?.numberOfPages || 1}
               size="small"
               color="primary"
             />
@@ -177,20 +164,14 @@ export default function Home() {
     ),
     [Views.MAP_VIEW]: (
       <div className="map-container">
-        <Map
-          sideListTopMargin={navHeight + tagsSliderHeight + 47}
-          cards={data?.data}
-        />
+        <Map sideListTopMargin={navHeight + tagsSliderHeight + 47} cards={data?.data} />
       </div>
     ),
   };
 
   const ButtonViewMap = {
     [Views.LIST_VIEW]: (
-      <button
-        onClick={() => toggleViewType(Views.MAP_VIEW)}
-        className={styles.toggleViewBtn}
-      >
+      <button onClick={() => toggleViewType(Views.MAP_VIEW)} className={styles.toggleViewBtn}>
         <span>View Map</span>
         <Image src="/assets/icons/map.svg" width={14} height={14} alt="map" />
       </button>
@@ -225,11 +206,7 @@ export default function Home() {
         searchText={filterState.searchText}
         setSearchText={setSearchText}
       />
-      <TagSlider
-        ref={tagsSliderRef}
-        {...{ setSelectedTags }}
-        selectedTags={filterState.selectedTags}
-      />
+      <TagSlider ref={tagsSliderRef} {...{ setSelectedTags }} selectedTags={filterState.selectedTags} />
       <div className="container">
         {ViewMap[view]}
         {!isNoData && ButtonViewMap[view]}
@@ -237,3 +214,9 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};

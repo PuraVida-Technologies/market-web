@@ -34,9 +34,7 @@ const CustomMarker = ({
           </div>
         </div>
       </div>
-      {activeMarker === `${lat}-${lng}` && (
-        <InfoWindow card={card} handleActiveMarker={handleActiveMarker} />
-      )}
+      {activeMarker === `${lat}-${lng}` && <InfoWindow card={card} handleActiveMarker={handleActiveMarker} />}
     </>
   );
 };

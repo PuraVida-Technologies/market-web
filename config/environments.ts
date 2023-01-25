@@ -1,11 +1,12 @@
-const environments = {
-    app: {        
-        nodeEnv: process.env.NODE_ENV,
-    },
-    provider: {
-        baseUrl: process.env.ENDPOINT_BASE_URL || '',
-    },
-    mapApiKey: process.env.MAP_API_KEY || ''
-}
+import getConfig from "next/config";
 
-export default environments
+const { publicRuntimeConfig } = getConfig();
+
+const environments = {
+  provider: {
+    baseUrl: publicRuntimeConfig.NEXT_PUBLIC_BASE_URL,
+  },
+  mapApiKey: publicRuntimeConfig.NEXT_PUBLIC_MAP_API_KEY,
+};
+
+export default environments;
