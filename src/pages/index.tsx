@@ -167,7 +167,7 @@ export default function Home() {
             <Pagination
               onChange={handlePaginationChange}
               page={filterState.page}
-              count={data?.pagination?.numberOfPages}
+              count={data?.pagination?.numberOfPages || 1}
               size="small"
               color="primary"
             />

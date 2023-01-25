@@ -22,12 +22,11 @@ type ITag = {
   slug: string;
 };
 
-const Tag = ({ slug, name, icon, onClick, selectedTags }: TagProps) => (
+const Tag = ({ slug, name, onClick, selectedTags }: TagProps) => (
   <div
     className={`${styles.tag} ${selectedTags.includes(slug) && styles.active}`}
     onClick={onClick}
   >
-    <img src={icon} alt="logo" />
     <p data-text={name}>{name}</p>
   </div>
 );
@@ -66,15 +65,20 @@ const TagSlider = forwardRef<HTMLInputElement, TagsSliderProps>(
     return (
       <div ref={ref} className={styles.tagsSlider}>
         <div className="container">
-          {tagsData.map((tag: ITag) => (
-            <Tag
-              key={tag._id}
-              {...{ ...tag, selectedTags }}
-              onClick={() => {
-                handleTagChange(tag.slug);
-              }}
-            />
-          ))}
+          {selectedTags.length ? (
+            <span className={styles.badge}>{selectedTags.length}</span>
+          ) : null}
+          <div className={styles.tagsInnerContainer}>
+            {tagsData.map((tag: ITag) => (
+              <Tag
+                key={tag._id}
+                {...{ ...tag, selectedTags }}
+                onClick={() => {
+                  handleTagChange(tag.slug);
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );
