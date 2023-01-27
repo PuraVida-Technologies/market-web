@@ -26,7 +26,7 @@ type FilterState = {
   selectedTags: string[];
 };
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const navRef = useRef(null);
   const tagsSliderRef = useRef(null);
   const [navHeight, setNavHeight] = useState(0);
@@ -199,6 +199,8 @@ export default function Home() {
     <div className={styles.home}>
       <Header>
         <title>PuraVida</title>
+        <meta name="description" content="PuraVida" />
+        <link rel="icon" href="/logo.png" />
       </Header>
       <NavHeader
         ref={navRef}

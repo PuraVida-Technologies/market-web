@@ -68,7 +68,7 @@ const Header = forwardRef<HTMLInputElement, HeaderProps>(({ isValidating, search
     <header className={styles.header} ref={ref}>
       <div className={`container ${styles.innerContainer}`}>
         <div className={styles.logoContainer}>
-          <Image src="/assets/icons/logo.svg" width={48} height={48} alt="logo" />
+          <Image src="/assets/icons/logo.png" width={48} height={48} alt="logo" />
           <h1>Puravida</h1>
         </div>
         <div className={styles.inputContainer}>
