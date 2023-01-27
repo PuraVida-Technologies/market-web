@@ -4,8 +4,11 @@ import Rating from "@mui/material/Rating";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./styles.module.scss";
 
-const ModalCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setActiveCard: (card: null) => void }) => {
-  const { name, address, openHours, rating, location } = activeCard;
+type ModalCardPropsType = { activeCard: CardType; setActiveCard: (card: null) => void };
+
+const ModalCard = ({ activeCard, setActiveCard }: ModalCardPropsType): JSX.Element => {
+  const { name, address, openHours, rating, location, mainImageUrl } = activeCard;
+  console.log(mainImageUrl);
 
   return (
     <div className={styles.singleCard}>
@@ -19,7 +22,7 @@ const ModalCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setAct
           alt="back"
           className={styles.backBtn}
         /> */}
-        <Image src="/assets/images/sideCard.jpg" fill alt="card" />
+        <Image src={`${mainImageUrl}`} fill alt="card" />
       </div>
       <div className={styles.textSection}>
         <div className={styles.addressCon}>
