@@ -1,8 +1,8 @@
 import instanceAxios from "./api";
 
-export function getMarketplaceTags() {
+export function getMarketplaceTags(): any {
   const QUERY = `query{
-    getMarketplaceTags(getMarketPlaceTagsInput:{})
+    getMarketplaceTags(getMarketPlaceTagsInput:{limit: 1000})
             {
                 data {
                   name
@@ -26,5 +26,6 @@ export function getMarketplaceTags() {
       tags: res.data.data.getMarketplaceTags.data,
       pagination: res.data.data.getMarketplaceTags.pagination,
     }));
+
   return fetcher;
 }
