@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: "dist",
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: [
       "placeimg.com",
