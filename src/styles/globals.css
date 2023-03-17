@@ -1,0 +1,13 @@
+@import 'antd/dist/reset.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body div#__next {
+    @apply h-full w-full;
+  }
+  * {
+    @apply border-solid border-0;
+  }
+}

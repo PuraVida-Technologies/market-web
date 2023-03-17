@@ -1,0 +1,39 @@
+{
+  "name": "@puravida/market-web",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "prepare": "husky install",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "commit": "git-cz"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@apollo/client": "^3.7.10",
+    "antd": "^5.3.1",
+    "graphql": "^16.6.0",
+    "next": "13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "18.15.3",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "autoprefixer": "^10.4.14",
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "git-cz": "^4.9.0",
+    "husky": "^8.0.3",
+    "postcss": "^8.4.21",
+    "postcss-import": "^15.1.0",
+    "prettier-plugin-tailwindcss": "^0.2.4",
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "tailwindcss": "^3.2.7"
+  }
+}
