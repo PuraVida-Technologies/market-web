@@ -1,3 +1,4 @@
+import { IPagination, IPost } from '@/types/IPost';
 import { gql } from '@apollo/client';
 
 export interface GetMarketplacePostsQueryParams {
@@ -7,6 +8,13 @@ export interface GetMarketplacePostsQueryParams {
   limit?: number;
   sortBy?: string;
   order?: string;
+}
+
+export interface GetMarketplacePostsResponse {
+  filterMarketplacePosts: {
+    data: IPost[];
+    pagination: IPagination;
+  };
 }
 
 export const getMarketplacePostsQuery = (

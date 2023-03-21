@@ -4,10 +4,92 @@
 @tailwind utilities;
 
 @layer base {
-  body div#__next {
-    @apply h-full w-full;
+  *,
+  ::before,
+  ::after {
+    border-width: 0;
+    border-style: solid;
   }
-  * {
-    @apply border-solid border-0;
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+  html,
+  body,
+  div,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  img,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section,
+  summary,
+  time,
+  audio,
+  video {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  /* Scroll bar */
+
+  /* width */
+  ::-webkit-scrollbar {
+    @apply h-1 w-1;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-text;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-light;
   }
 }

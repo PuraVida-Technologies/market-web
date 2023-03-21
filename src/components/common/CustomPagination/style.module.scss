@@ -1,0 +1,40 @@
+.pagination {
+  @apply text-primary mx-auto;
+
+  li {
+    @apply inline-flex items-center justify-center border-2 border-transparent;
+
+    a {
+      @apply text-gray-text;
+    }
+
+    &[class~='ant-pagination-item'] {
+      @apply bg-primary-light;
+    }
+    &[class~='ant-pagination-item-active'] {
+      @apply bg-primary text-white hover:border-transparent;
+
+      a {
+        @apply text-white hover:text-white;
+      }
+    }
+
+    &[class~='ant-pagination-prev'] a,
+    &[class~='ant-pagination-next'] a {
+      @apply font-semibold text-primary;
+    }
+
+    &[class~='ant-pagination-disabled'] {
+      @apply hover:border-transparent;
+
+      a {
+        @apply text-gray-text;
+      }
+    }
+
+    &[class~='ant-pagination-jump-next'],
+    &[class~='ant-pagination-jump-prev'] {
+      @apply text-xl hover:border-transparent;
+    }
+  }
+}

@@ -17,9 +17,12 @@
     "antd": "^5.3.1",
     "graphql": "^16.6.0",
     "next": "13.2.4",
+    "next-query-params": "^4.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.0.2"
+    "sass": "^1.59.3",
+    "typescript": "5.0.2",
+    "use-query-params": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "18.15.3",
