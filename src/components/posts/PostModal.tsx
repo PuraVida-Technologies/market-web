@@ -13,7 +13,7 @@ const PostModal = (props: PostModalProps) => {
   const { post, loadingPost } = props;
   const [windowWidth] = useWindowSize();
   const isMobile = windowWidth <= 426;
-  // console.log({ windowWidth });
+
   return (
     <Modal
       {...props}
@@ -26,18 +26,18 @@ const PostModal = (props: PostModalProps) => {
       bodyStyle={
         isMobile
           ? {
-              minHeight: '100vh',
-              overflow: 'hidden',
-              placeContent: 'center',
-              display: loadingPost ? 'grid' : 'block',
-            }
+            minHeight: '100vh',
+            overflow: 'hidden',
+            placeContent: 'center',
+            display: loadingPost ? 'grid' : 'block',
+          }
           : {
-              minHeight: '70vh',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              placeContent: 'center',
-              display: loadingPost ? 'grid' : 'block',
-            }
+            minHeight: '70vh',
+            borderRadius: '8px',
+            overflow: 'hidden',
+            placeContent: 'center',
+            display: loadingPost ? 'grid' : 'block',
+          }
       }
       closeIcon={
         <Button
@@ -49,9 +49,8 @@ const PostModal = (props: PostModalProps) => {
         </Button>
       }
     >
-      {loadingPost && (
-        <Spin className="w-full h-60 grid place-content-center" />
-      )}
+
+      {!loadingPost ? 
       <section>
         <Carousel
           className="border-b border-gray-light"
@@ -107,7 +106,7 @@ const PostModal = (props: PostModalProps) => {
             </p>
           </section>
         </section>
-      </section>
+      </section> : <Spin className="w-full h-60 grid place-content-center" />}
     </Modal>
   );
 };
