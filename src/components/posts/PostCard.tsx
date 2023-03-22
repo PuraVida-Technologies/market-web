@@ -1,9 +1,18 @@
 import { IPost } from '@/types/IPost';
 import Image from 'next/image';
 
-const PostCard = ({ post }: { post: IPost }) => {
+const PostCard = ({
+  post,
+  onClick,
+}: {
+  post: IPost;
+  onClick: VoidFunction;
+}) => {
   return (
-    <li className="rounded-lg shadow-md cursor-pointer flex flex-col hover:shadow-lg transition-shadow ease-in-out border border-gray-light">
+    <li
+      className="rounded-lg shadow-md cursor-pointer flex flex-col hover:shadow-lg transition-shadow ease-in-out border border-gray-light"
+      onClick={onClick}
+    >
       <figure className="relative w-full h-[170px] border-b border-gray-light">
         <Image
           alt={post.name}
