@@ -1,13 +1,21 @@
 import { IPagination, IPost } from '@/types/IPost';
 import { gql } from '@apollo/client';
 
-export interface GetMarketplacePostsQueryParams {
-  text?: string;
-  tagsSlugs?: string[];
-  page?: number;
+export interface FilterMarketplacePostsInput {
+  latitude?: number;
   limit?: number;
-  sortBy?: string;
+  longitude?: number;
+  maxDistance?: number;
+  minDistance?: number;
   order?: string;
+  page?: number;
+  sortBy?: string;
+  tagsSlugs?: string[];
+  text?: string;
+}
+
+export interface GeFilterMarketplacePostsVariables {
+  filterPostsInput: FilterMarketplacePostsInput;
 }
 
 export interface GetMarketplacePostsResponse {
@@ -17,45 +25,25 @@ export interface GetMarketplacePostsResponse {
   };
 }
 
-export const getMarketplacePostsQuery = (
-  queryParams: GetMarketplacePostsQueryParams
-) => {
-  return gql`
-    query {
-      filterMarketplacePosts(filterPostsInput: 
-        { 
-          ${
-            queryParams.tagsSlugs?.length
-              ? `tagsSlugs: ${JSON.stringify(queryParams.tagsSlugs)}`
-              : ''
-          } 
-          ${queryParams.text ? `text:"${queryParams.text}"` : ''}
-          ${queryParams.page ? `page:${queryParams.page}` : ''}
-          ${queryParams.limit ? `limit:${queryParams.limit}` : ''}
-          ${queryParams.order ? `.order:${queryParams.order}` : ''}
-          ${queryParams.sortBy ? `.sortBy:${queryParams.sortBy}` : ''}
-        }
-      ) {
-        data {
-          _id
-          name
-          description
-          mainImageUrl
-          address
-          rating
-          openHours
-          location {
-            coordinates
-          }
-        }
-        pagination {
-          page
-          total
-          numberOfPages
-          count
-          limit
-        }
+export const getMarketplacePostsQuery = gql`
+  # Write your query or mutation here
+  query GeFilterMarketplacePosts(
+    $filterPostsInput: FilterMarketplacePostsInput!
+  ) {
+    filterMarketplacePosts(filterPostsInput: $filterPostsInput) {
+      data {
+        _id
+        name
+        description
+        mainImageUrl
+      }
+      pagination {
+        page
+        total
+        numberOfPages
+        count
+        limit
       }
     }
-  `;
-};
+  }
+`;

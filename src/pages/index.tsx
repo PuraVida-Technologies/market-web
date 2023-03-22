@@ -1,4 +1,6 @@
 import {
+  FilterMarketplacePostsInput,
+  GeFilterMarketplacePostsVariables,
   GetMarketplacePostsResponse,
   getMarketplacePostsQuery,
 } from '@/apollo/posts.service';
@@ -27,15 +29,19 @@ export default function Home() {
     tags: withDefault(ArrayParam, []),
   });
 
-  const { data: posts, loading: postsLoading } =
-    useQuery<GetMarketplacePostsResponse>(
-      getMarketplacePostsQuery({
+  const { data: posts, loading: postsLoading } = useQuery<
+    GetMarketplacePostsResponse,
+    GeFilterMarketplacePostsVariables
+  >(getMarketplacePostsQuery, {
+    variables: {
+      filterPostsInput: {
+        limit: 12,
         tagsSlugs: query.tags as string[],
         page: query.page,
-        limit: 12,
-        text: query?.text as string,
-      })
-    );
+        text: query.text as string,
+      },
+    },
+  });
 
   const { data: tags } = useQuery<GetMarketplaceTagsResponse>(
     getMarketplaceTagsQuery()
