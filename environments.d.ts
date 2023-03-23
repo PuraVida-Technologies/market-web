@@ -1,13 +1,13 @@
 declare global {
-    namespace NodeJS {
-      interface ProcessEnv {
-        NEXT_PUBLIC_NODE_ENV: string;
-        NEXT_PUBLIC_BASE_URL: string;
-        NEXT_PUBLIC_MAP_API_KEY: string;
-      }
+  namespace NodeJS {
+    interface ProcessEnv {
+      NEXT_PUBLIC_NODE_ENV: string;
+      NEXT_PUBLIC_BASE_URL: string;
+      NEXT_PUBLIC_MAP_API_KEY: string;
     }
   }
-  
-  // If this file has no import/export statements (i.e. is a script)
-  // convert it into a module by adding an empty export statement.
-  export {}
+}
+
+// If this file has no import/export statements (i.e. is a script)
+// convert it into a module by adding an empty export statement.
+export {};

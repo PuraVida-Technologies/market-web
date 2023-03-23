@@ -1,33 +1,24 @@
 import Image from "next/image";
 import { CardType } from "@/types/Card";
-import Rating from "@mui/material/Rating";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./styles.module.scss";
 
 type ModalCardPropsType = { activeCard: CardType; setActiveCard: (card: null) => void };
 
 const ModalCard = ({ activeCard, setActiveCard }: ModalCardPropsType): JSX.Element => {
-  const { name, address, openHours, rating, location, mainImageUrl } = activeCard;
+  const { name, address, description, location, mainImageUrl } = activeCard;
   console.log(mainImageUrl);
 
   return (
     <div className={styles.singleCard}>
       <div className={styles.imageContainer}>
         <CloseIcon onClick={() => setActiveCard(null)} className={styles.closeBtn} fontSize="small" />
-        {/* <Image
-          onClick={() => setActiveCard(null)}
-          src="/assets/icons/sideCardBack.svg"
-          width={28}
-          height={28}
-          alt="back"
-          className={styles.backBtn}
-        /> */}
         <Image src={`${mainImageUrl}`} fill alt="card" />
       </div>
       <div className={styles.textSection}>
         <div className={styles.addressCon}>
           <div>
-            <h4>{name}</h4>
+            <h4>{name?.slice(0, 20)}</h4>
             <div>
               <Image
                 src="/assets/icons/ssMapIcon.svg"
@@ -53,30 +44,10 @@ const ModalCard = ({ activeCard, setActiveCard }: ModalCardPropsType): JSX.Eleme
             />
           </a>
         </div>
-        <div className={styles.stars}>
-          {rating && (
-            <div className={styles.rating}>
-              <Rating name="read-only" precision={0.5} value={rating} readOnly />
-            </div>
-          )}
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros.</p>
-        </div>
-        <div className={styles.specs}>
-          <div>
-            <h4>Open Hour</h4>
-            <p>{openHours}</p>
-          </div>
-          <div>
-            <h4>Cuisines</h4>
-            <p>Western, Asian</p>
-          </div>
-        </div>
+
         <div className={styles.description}>
           <h4>Description</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros. Cras at malesuada lectus.
-            Fusce ac massa nec nunc consectetur convallis.
-          </p>
+          <p>{description}</p>
         </div>
       </div>
     </div>

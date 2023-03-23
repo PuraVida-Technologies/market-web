@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { CardType } from "@/types/Card";
-import Rating from "@mui/material/Rating";
 import styles from "./styles.module.scss";
 
 const SingleCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setActiveCard: (card: null) => void }) => {
-  const { name, address, openHours, rating, location } = activeCard;
+  const { name, address, location, description, mainImageUrl } = activeCard;
 
   return (
     <div className={styles.singleCard}>
@@ -17,7 +16,7 @@ const SingleCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setAc
           alt="back"
           className={styles.backBtn}
         />
-        <Image src="/assets/images/sideCard.jpg" fill alt="card" />
+        <Image src={`${mainImageUrl || "/assets/images/sideCard.jpg"}`} fill alt="card" />
       </div>
       <div className={styles.textSection}>
         <div className={styles.addressCon}>
@@ -48,30 +47,10 @@ const SingleCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setAc
             />
           </a>
         </div>
-        <div className={styles.stars}>
-          {rating && (
-            <div className={styles.rating}>
-              <Rating name="read-only" precision={0.5} value={rating} readOnly />
-            </div>
-          )}
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros.</p>
-        </div>
-        <div className={styles.specs}>
-          <div>
-            <h4>Open Hour</h4>
-            <p>{openHours}</p>
-          </div>
-          <div>
-            <h4>Cuisines</h4>
-            <p>Western, Asian</p>
-          </div>
-        </div>
+
         <div className={styles.description}>
           <h4>Description</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in mollis eros. Cras at malesuada lectus.
-            Fusce ac massa nec nunc consectetur convallis.
-          </p>
+          <p>{description}</p>
         </div>
       </div>
     </div>

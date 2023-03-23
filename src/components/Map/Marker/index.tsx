@@ -30,7 +30,7 @@ const CustomMarker = ({
           <Image src="/assets/icons/fullMarker.svg" fill alt="marker" />
           <p className={styles.rating}>{rating}</p>
           <div className={styles.textContainer}>
-            <p>{name}</p>
+            <p>{name.slice(0, 20)}</p>
           </div>
         </div>
       </div>
