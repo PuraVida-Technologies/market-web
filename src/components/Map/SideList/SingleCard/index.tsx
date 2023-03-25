@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Image from "next/image";
 import { CardType } from "@/types/Card";
 import styles from "./styles.module.scss";
 
 const SingleCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setActiveCard: (card: null) => void }) => {
-  const { name, address, location, description, mainImageUrl } = activeCard;
+  const { name, location, description, mainImageUrl } = activeCard;
 
   return (
     <div className={styles.singleCard}>
@@ -21,17 +22,7 @@ const SingleCard = ({ activeCard, setActiveCard }: { activeCard: CardType; setAc
       <div className={styles.textSection}>
         <div className={styles.addressCon}>
           <div>
-            <h4>{name}</h4>
-            <div>
-              <Image
-                src="/assets/icons/ssMapIcon.svg"
-                width={12}
-                height={14}
-                alt="location"
-                className={styles.ssMapIcon}
-              />
-              <p>{address}</p>
-            </div>
+            <h4>{name.slice(0, 20)}</h4>
           </div>
           <a
             href={`https://maps.google.com/?q=${location.coordinates[0]},${location.coordinates[1]}`}

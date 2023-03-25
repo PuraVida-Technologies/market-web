@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { CardType } from "@/types/Card";
 import styles from "./styles.module.scss";
 import ListCard from "./ListCard";

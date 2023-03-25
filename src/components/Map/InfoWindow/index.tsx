@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Image from "next/image";
 import { CardType } from "@/types/Card";
-import Rating from "@mui/material/Rating";
 import styles from "./styles.module.scss";
 
 const InfoWindow = ({
@@ -11,7 +10,7 @@ const InfoWindow = ({
   card: CardType;
   handleActiveMarker: (markerId: string) => void;
 }) => {
-  const { distance, name, location, rating, address } = card;
+  const { name, location, address } = card;
 
   return (
     <div className={styles.infoWindow} onClick={(e) => e.stopPropagation()}>
@@ -27,16 +26,7 @@ const InfoWindow = ({
         <Image src={"/assets/icons/infoWindowImg.svg"} fill alt="card" />
       </div>
       <div className={styles.infoContainer}>
-        <h4>{name}</h4>
-        <div className={styles.address}>
-          <Image src="/assets/icons/addressArrow.svg" width={10} height={10} alt="distance" />
-          <span>{distance}</span>
-        </div>
-        {rating && (
-          <div className={styles.rating}>
-            <Rating size="small" name="read-only" precision={0.5} value={rating} readOnly />
-          </div>
-        )}
+        <h4>{name.slice(0, 20)}</h4>
         <div className={styles.content}>
           <p>{address}</p>
         </div>
@@ -48,12 +38,7 @@ const InfoWindow = ({
               rel="noreferrer"
             >
               <Image src="/assets/icons/send.svg" width={11} height={14} alt="direction" />
-              {/* <span>Direction</span> */}
             </a>
-          </button>
-          <button>
-            <Image src="/assets/icons/shape.svg" width={8} height={12} alt="save" />
-            <span>Save</span>
           </button>
         </div>
       </div>

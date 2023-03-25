@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { CardType } from "@/types/Card";
 import Marker from "./Marker";
@@ -39,16 +40,6 @@ const Map = ({ cards, sideListTopMargin }: { cards: CardType[]; sideListTopMargi
     setActiveMarker(markerID);
   };
 
-  useEffect(() => {
-    if (cards && cards[0]) {
-      const center = {
-        lat: cards[0].location.coordinates[0],
-        lng: cards[0].location.coordinates[1],
-      };
-      setCenter(center);
-    }
-  }, [cards]);
-
   return (
     <>
       <SideList {...{ activeCard, setActiveCard, cards, sideListTopMargin }} />
@@ -57,7 +48,7 @@ const Map = ({ cards, sideListTopMargin }: { cards: CardType[]; sideListTopMargi
           key: environments.mapApiKey,
         }}
         center={center}
-        defaultZoom={7}
+        defaultZoom={5}
         onClick={() => setActiveMarker("")}
       >
         {cards?.map((card, i) => (
