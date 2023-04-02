@@ -76,9 +76,9 @@ const AppLayout = ({ children, className }: AppLayoutProps) => {
         <ApolloProvider client={client}>
           <main className={className}>
             <Header>
-              <title>PuraVida</title>
-              <meta name="description" content="PuraVida" />
-              <link rel="icon" href="/assets/logo.png" />
+              <title>Pura Vida</title>
+              <meta name="description" content="Pura Vida" />
+              <link rel="icon" href="/assets/logo.svg" />
             </Header>
             <AntThemeProvider>{children}</AntThemeProvider>
             {ButtonViewMap[view as string]}

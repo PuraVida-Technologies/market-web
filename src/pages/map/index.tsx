@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import {
-  POSTS_LIMIT,
   getMarketplacePostsQuery,
   GetMarketplacePostsResponse,
   GeFilterMarketplacePostsVariables,
@@ -11,6 +10,8 @@ import Tags from "@/components/common/Tags";
 import { useQuery } from "@apollo/client";
 import { SideList } from "@/components/map/SideList";
 import { IPost } from "@/types/IPost";
+import { NextSeo,DefaultSeoProps } from 'next-seo';
+
 
 export default function MapPage() {
 
@@ -37,8 +38,24 @@ export default function MapPage() {
       lng: post.location?.coordinates[1] as number,})
   }
 
+
+  const metaData: DefaultSeoProps = posts && posts?.filterMarketplacePosts?.data?.length ? {
+    openGraph: {
+      url: `${process.env.NEXT_WEBSITE_URL}/map`,
+      title: `Pura Vida | map`,
+      description: posts?.filterMarketplacePosts?.data[0]?.description,
+      images: posts?.filterMarketplacePosts?.data[0]?.imagesUrls?.map(url => ({
+        url: url,
+        width: 800,
+        height: 600,
+      }))
+    },
+    canonical: `${process.env.NEXT_WEBSITE_URL}/map`,
+  } : {};
+
   return (
     <>
+      <NextSeo {...metaData} />
       <main className="flex flex-col">
         <Header postsLoading={postsLoading} />
         <section className="container flex flex-col gap-4 md:gap-6">

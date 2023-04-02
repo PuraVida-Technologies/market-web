@@ -3,6 +3,7 @@ declare global {
       interface ProcessEnv {
         NEXT_PUBLIC_BASE_URL: string;
         NEXT_PUBLIC_MAP_API_KEY: string;
+        NEXT_WEBSITE_URL: string;
       }
     }
   }

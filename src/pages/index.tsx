@@ -2,15 +2,12 @@ import {
   GeFilterMarketplacePostsVariables,
   GetMarketPlacePostBySlugResponse,
   GetMarketPlacePostBySlugVariables,
-  GetMarketPlacePostResponse,
-  GetMarketPlacePostVariables,
   GetMarketplacePostsResponse,
   POSTS_LIMIT,
   getMarketPlacePostBySlugQuery,
-  getMarketPlacePostQuery,
   getMarketplacePostsQuery,
 } from "@/apollo/posts.service";
-
+import  { NextSeo,DefaultSeoProps } from 'next-seo';
 import CustomPagination from "@/components/common/CustomPagination";
 import Header from "@/components/common/Header";
 import Tags from "@/components/common/Tags";
@@ -57,8 +54,24 @@ export default function HomePage() {
     skip: !query.slug,
   });
 
+  const metaData: DefaultSeoProps = !query.slug ? {} : {
+    openGraph: {
+      url: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+      title: `Pura Vida | ${selectedPost?.getMarketPlacePostBySlug?.name}`,
+      description: selectedPost?.getMarketPlacePostBySlug?.description,
+      images: selectedPost?.getMarketPlacePostBySlug?.imagesUrls?.map(url => ({
+        url: url,
+        width: 800,
+        height: 600,
+        alt: selectedPost?.getMarketPlacePostBySlug?.name,
+      }))
+    },
+    canonical: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+  }
+
   return (
     <>
+      <NextSeo {...metaData} />
       <main className="flex flex-col gap-2 md:gap-6">
         <Header postsLoading={postsLoading} />
         <section className="container flex flex-col gap-4 md:gap-6">
