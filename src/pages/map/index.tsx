@@ -12,6 +12,8 @@ import { SideList } from "@/components/map/SideList";
 import { IPost } from "@/types/IPost";
 import { NextSeo, DefaultSeoProps } from "next-seo";
 import config from "@/config/environments";
+import { GetServerSideProps } from "next/types";
+
 
 export default function MapPage() {
   const { data: posts, loading: postsLoading } = useQuery<
@@ -118,3 +120,9 @@ export default function MapPage() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};

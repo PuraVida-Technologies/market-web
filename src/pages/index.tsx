@@ -16,6 +16,7 @@ import PostModal from "@/components/posts/PostModal";
 import { IPost } from "@/types/IPost";
 import { useQuery } from "@apollo/client";
 import { Button, Empty, Spin } from "antd";
+import { GetServerSideProps } from "next/types";
 import {
   ArrayParam,
   NumberParam,
@@ -58,21 +59,21 @@ export default function HomePage() {
   const metaData: DefaultSeoProps = !query.slug
     ? {}
     : {
-        openGraph: {
-          url: `${config.marketFrontendUrl}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
-          title: `Pura Vida | ${selectedPost?.getMarketPlacePostBySlug?.name}`,
-          description: selectedPost?.getMarketPlacePostBySlug?.description,
-          images: selectedPost?.getMarketPlacePostBySlug?.imagesUrls?.map(
-            (url) => ({
-              url: url,
-              width: 800,
-              height: 600,
-              alt: selectedPost?.getMarketPlacePostBySlug?.name,
-            })
-          ),
-        },
-        canonical: `${config.marketFrontendUrl}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
-      };
+      openGraph: {
+        url: `${config.marketFrontendUrl}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+        title: `Pura Vida | ${selectedPost?.getMarketPlacePostBySlug?.name}`,
+        description: selectedPost?.getMarketPlacePostBySlug?.description,
+        images: selectedPost?.getMarketPlacePostBySlug?.imagesUrls?.map(
+          (url) => ({
+            url: url,
+            width: 800,
+            height: 600,
+            alt: selectedPost?.getMarketPlacePostBySlug?.name,
+          })
+        ),
+      },
+      canonical: `${config.marketFrontendUrl}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+    };
 
   return (
     <>
@@ -142,3 +143,10 @@ export default function HomePage() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
+
