@@ -15,7 +15,7 @@ export const defaultSEOConfig: DefaultSeoProps = {
         url: config.marketFrontendUrl,
         siteName: 'Pura Vida',
         images: [{
-            url: '/assets/logo.png',
+            url: '/assets/search-list-view.png',
             width: 800,
             height: 600,
             alt: 'logo',
