@@ -1,5 +1,5 @@
-import { IPost } from '@/types/IPost';
-import Image from 'next/image';
+import { IPost } from "@/types/IPost";
+import Image from "next/image";
 
 const PostCard = ({
   post,
@@ -16,7 +16,7 @@ const PostCard = ({
       <figure className="relative w-full h-[170px] border-b border-gray-light">
         <Image
           alt={post.name}
-          src={post.mainImageUrl || '/assets/mapPin.svg'} //Todo Need default image
+          src={post.mainImageUrl || "/assets/mapPin.svg"} //Todo Need default image
           fill
           className="object-cover origin-center rounded-t-lg"
         />

@@ -6,23 +6,23 @@ import {
   POSTS_LIMIT,
   getMarketPlacePostQuery,
   getMarketplacePostsQuery,
-} from '@/apollo/posts.service';
+} from "@/apollo/posts.service";
 
-import CustomPagination from '@/components/common/CustomPagination';
-import { Header } from '@/components/common/Header';
-import { Tags } from '@/components/common/Tags';
-import PostCard from '@/components/posts/PostCard';
-import PostModal from '@/components/posts/PostModal';
-import { IPost } from '@/types/IPost';
-import { useQuery } from '@apollo/client';
-import { Button, Empty, Spin } from 'antd';
+import CustomPagination from "@/components/common/CustomPagination";
+import Header from "@/components/common/Header";
+import Tags from "@/components/common/Tags";
+import PostCard from "@/components/posts/PostCard";
+import PostModal from "@/components/posts/PostModal";
+import { IPost } from "@/types/IPost";
+import { useQuery } from "@apollo/client";
+import { Button, Empty, Spin } from "antd";
 import {
   ArrayParam,
   NumberParam,
   StringParam,
   useQueryParams,
   withDefault,
-} from 'use-query-params';
+} from "use-query-params";
 
 export default function HomePage() {
   const [query, setQuery] = useQueryParams({
@@ -45,8 +45,6 @@ export default function HomePage() {
       },
     },
   });
-
-
 
   const { data: selectedPost, loading: loadingSelectedPost } = useQuery<
     GetMarketPlacePostResponse,
@@ -83,7 +81,7 @@ export default function HomePage() {
                       <Button
                         type="primary"
                         size="large"
-                        onClick={() => setQuery({ text: null }, 'replace')}
+                        onClick={() => setQuery({ text: null }, "replace")}
                       >
                         Clear Filters
                       </Button>

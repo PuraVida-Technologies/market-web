@@ -36,6 +36,10 @@ export const getMarketplacePostsQuery = gql`
         name
         description
         mainImageUrl
+        imagesUrls
+        location {
+          coordinates
+        }
       }
       pagination {
         page

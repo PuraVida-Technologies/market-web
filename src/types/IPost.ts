@@ -8,9 +8,9 @@ export interface ITag {
 }
 
 export enum POST_STATUS {
-  APPROVED = 'approved',
-  REJECTED = 'rejected',
-  PENDING = 'pending',
+  APPROVED = "approved",
+  REJECTED = "rejected",
+  PENDING = "pending",
 }
 
 export interface ILocation {
@@ -34,6 +34,7 @@ export interface IPost {
   mainImageUrl: string;
   imagesUrls?: string[];
   address: string;
+  distance?: string;
   userId: string;
   status: POST_STATUS;
   openHours?: string;
@@ -41,7 +42,8 @@ export interface IPost {
   createdAt: Date;
   updatedAt: Date;
   rating: number;
-  location?: ILocation;
+  price: number;
+  location: ILocation;
   owner?: IOwner;
 }
 

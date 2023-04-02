@@ -1,0 +1,33 @@
+.toggleViewBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+  border-radius: 50px;
+  font-weight: 700;
+  width: 120px;
+  height: 42px;
+  cursor: pointer;
+  border: none;
+  position: fixed;
+  bottom: 64px;
+  margin: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  span {
+    color: #fff;
+    margin-right: 9px;
+  }
+
+  @media screen and (max-width: 992px) {
+    height: 32px;
+    font-size: 12px;
+  }
+}
+
+.mapToggleViewBtn {
+  @media screen and (max-width: 1024px) {
+    bottom: 220px;
+  }
+}

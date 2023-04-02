@@ -1,4 +1,4 @@
-@import 'antd/dist/reset.css';
+@import "antd/dist/reset.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -89,5 +89,27 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-light;
+  }
+}
+
+.bottomSliderList .slick-track {
+  display: flex;
+  flex-direction: row;
+}
+
+.bottomSliderList .slick-track .slick-slide {
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .bottomSliderList .slick-track .slick-slide {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .bottomSliderList .slick-track .slick-slide {
+    padding: 0 2px;
   }
 }
