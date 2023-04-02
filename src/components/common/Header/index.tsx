@@ -10,7 +10,6 @@ import {
 } from "use-query-params";
 import { IHeaderOptions } from "@/types/IHeader";
 import Link from "next/link";
-import { forwardRef } from "react";
 
 const Header = ({ postsLoading }: IHeaderOptions) => {
   const [query, setQuery] = useQueryParams({
@@ -27,7 +26,7 @@ const Header = ({ postsLoading }: IHeaderOptions) => {
           <Link href="/" className="text-black flex items-center">
             <Image
               alt=""
-              src={"/assets/logo.svg"}
+              src={"/assets/logo.png"}
               width={40}
               height={40}
               className="object-contain object-center"

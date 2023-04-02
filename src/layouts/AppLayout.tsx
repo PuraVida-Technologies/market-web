@@ -32,9 +32,6 @@ enum Views {
 }
 
 
-
-
-
 const AppLayout = ({ children, className }: AppLayoutProps) => {
   const router = useRouter();
   const [view, setView] = useState<string>(Views.LIST_VIEW)
@@ -78,7 +75,7 @@ const AppLayout = ({ children, className }: AppLayoutProps) => {
             <Header>
               <title>Pura Vida</title>
               <meta name="description" content="Pura Vida" />
-              <link rel="icon" href="/assets/logo.svg" />
+              <link rel="icon" type="image/png" href="/assets/logo.png"/>
             </Header>
             <AntThemeProvider>{children}</AntThemeProvider>
             {ButtonViewMap[view as string]}
