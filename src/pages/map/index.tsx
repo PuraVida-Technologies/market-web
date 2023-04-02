@@ -101,7 +101,7 @@ export default function MapPage() {
               <Marker
                 key={post._id}
                 onClick={() => handleOnClick(post)}
-                icon={"/assets/marker.svg"}
+                icon={"/assets/map-pin.png"}
                 position={{
                   lat: post.location?.coordinates[0] as number,
                   lng: post.location?.coordinates[1] as number,
