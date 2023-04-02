@@ -11,6 +11,7 @@ import { useQuery } from "@apollo/client";
 import { SideList } from "@/components/map/SideList";
 import { IPost } from "@/types/IPost";
 import { NextSeo, DefaultSeoProps } from "next-seo";
+import config from "@/config/environments";
 
 export default function MapPage() {
   const { data: posts, loading: postsLoading } = useQuery<
@@ -42,7 +43,7 @@ export default function MapPage() {
     posts && posts?.filterMarketplacePosts?.data?.length
       ? {
           openGraph: {
-            url: `${process.env.NEXT_WEBSITE_URL}/map`,
+            url: `${config.marketFrontendUrl}/map`,
             title: `Pura Vida | map`,
             description: posts?.filterMarketplacePosts?.data[0]?.description,
             images: posts?.filterMarketplacePosts?.data[0]?.imagesUrls?.map(
@@ -53,7 +54,7 @@ export default function MapPage() {
               })
             ),
           },
-          canonical: `${process.env.NEXT_WEBSITE_URL}/map`,
+          canonical: `${config.marketFrontendUrl}/map`,
         }
       : {};
 

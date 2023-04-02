@@ -1,7 +1,8 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import config from "@/config/environments";
 
 const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_BASE_URL,
+  uri: config.provider.baseUrl,
   cache: new InMemoryCache(),
 });
 

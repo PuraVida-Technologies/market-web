@@ -9,7 +9,7 @@ import { LoadScript } from '@react-google-maps/api';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import styles from "./styles.module.scss";
-
+import config from "@/config/environments";
 
 interface AppLayoutProps extends PropsWithChildren {
   className?: string;
@@ -69,7 +69,7 @@ const AppLayout = ({ children, className }: AppLayoutProps) => {
   
   return (
     <LoadScript
-      googleMapsApiKey={process.env.NEXT_PUBLIC_MAP_API_KEY}
+      googleMapsApiKey={config.mapApiKey}
       libraries={['places']}
     >
       <QueryParamProvider adapter={Adapter}>

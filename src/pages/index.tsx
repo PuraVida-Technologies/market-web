@@ -23,6 +23,7 @@ import {
   useQueryParams,
   withDefault,
 } from "use-query-params";
+import config from "@/config/environments";
 
 export default function HomePage() {
   const [query, setQuery] = useQueryParams({
@@ -58,7 +59,7 @@ export default function HomePage() {
     ? {}
     : {
         openGraph: {
-          url: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+          url: `${config.marketFrontendUrl}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
           title: `Pura Vida | ${selectedPost?.getMarketPlacePostBySlug?.name}`,
           description: selectedPost?.getMarketPlacePostBySlug?.description,
           images: selectedPost?.getMarketPlacePostBySlug?.imagesUrls?.map(
@@ -70,7 +71,7 @@ export default function HomePage() {
             })
           ),
         },
-        canonical: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+        canonical: `${config.marketFrontendUrl}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
       };
 
   return (

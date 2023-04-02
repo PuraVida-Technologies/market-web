@@ -1,4 +1,5 @@
 import { DefaultSeoProps } from "next-seo";
+import config from "@/config/environments";
 
 export const defaultSEOConfig: DefaultSeoProps = {
     openGraph: {
@@ -6,7 +7,7 @@ export const defaultSEOConfig: DefaultSeoProps = {
         type: 'website',
         locale: 'en_IE',
         description: 'Pura Vida, Bringing a complete Bitcoin economic solution to Costa Rica.',
-        url: process.env.NEXT_WEBSITE_URL,
+        url: config.marketFrontendUrl,
         siteName: 'Pura Vida',
     },
     twitter: {
@@ -14,5 +15,5 @@ export const defaultSEOConfig: DefaultSeoProps = {
         site: '@site',
         cardType: 'summary_large_image',
     },
-    canonical: process.env.NEXT_WEBSITE_URL,
+    canonical: config.marketFrontendUrl,
 };
