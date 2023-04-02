@@ -8,7 +8,7 @@ export interface GetMarketplaceTagsResponse {
   };
 }
 
-export const getMarketplaceTagsQuery = () => gql`
+export const getMarketplaceTagsQuery = gql`
   query {
     getMarketplaceTags(getMarketPlaceTagsInput: { limit: 1000 }) {
       data {
