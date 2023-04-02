@@ -2,6 +2,19 @@ import Image from "next/image";
 import { Carousel, Rate } from "antd";
 import styles from "./styles.module.scss";
 import { IPost } from "@/types/IPost";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const settings = {
+  infinite: true,
+  speed: 500,
+  arrows: false,
+  draggable: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  dots: true,
+};
 
 const SingleCard = ({
   activeCard,
@@ -16,7 +29,7 @@ const SingleCard = ({
   return (
     <div className={styles.singleCard}>
       <div className={styles.imageContainer}>
-      <Image
+        <Image
           onClick={() => setActiveCard(null)}
           src="/assets/icons/sideCardBack.svg"
           width={28}
@@ -25,38 +38,31 @@ const SingleCard = ({
           className={`${styles.backBtn} object-cover origin-center rounded-t-lg`}
         />
 
-      <Carousel
-            className="border-b border-gray-light"
-            dots={{
-              className:
-                'bg-white align-middle w-min mx-auto rounded-lg [&>[class="slick-active"]_button]:bg-primary [&>:not([class="slick-active"])_button]:bg-primary [class="slick-active"]_button]:rounded [&>:not([class="slick-active"])_button]:rounded',
-            }}
-          >
-            {imagesUrls?.length? (
-              imagesUrls?.map((image) => (
-                <div
-                  key={image}
-                  className="relative w-full sm:w-[400px] h-[250px] sm:rounded-lg"
-                >
-                  <Image
-                    alt=""
-                    src={image}
-                    fill
-                    className="object-cover object-center w-full h-full align-middle sm:rounded-t-lg"
-                  />
-                </div>
-              ))
-            ) : (
-              <div className="relative w-full sm:w-[400px] h-[250px] sm:rounded-lg">
+        <Slider {...settings} className="border-b border-gray-light">
+          {imagesUrls?.length ? (
+            imagesUrls?.map((image) => (
+              <div
+                key={image}
+                className="relative cursor-grab w-full sm:w-[400px] h-[250px] sm:rounded-lg">
                 <Image
                   alt=""
-                  src={mainImageUrl}
+                  src={image}
                   fill
                   className="object-cover object-center w-full h-full align-middle sm:rounded-t-lg"
                 />
               </div>
-            )}
-          </Carousel>
+            ))
+          ) : (
+            <div className="relative w-full sm:rounded-lg">
+              <Image
+                alt=""
+                src={mainImageUrl}
+                fill
+                className="object-cover object-center w-full h-full align-middle sm:rounded-t-lg"
+              />
+            </div>
+          )}
+        </Slider>
       </div>
       <div className={styles.textSection}>
         <div className={styles.addressCon}>
@@ -66,8 +72,7 @@ const SingleCard = ({
           <a
             href={`https://maps.google.com/?q=${location.coordinates[0]},${location.coordinates[1]}`}
             target="_blank"
-            rel="noreferrer"
-          >
+            rel="noreferrer">
             <Image
               src="/assets/icons/singleSideLocation.svg"
               width={104}

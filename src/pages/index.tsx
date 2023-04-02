@@ -7,7 +7,7 @@ import {
   getMarketPlacePostBySlugQuery,
   getMarketplacePostsQuery,
 } from "@/apollo/posts.service";
-import  { NextSeo,DefaultSeoProps } from 'next-seo';
+import { NextSeo, DefaultSeoProps } from "next-seo";
 import CustomPagination from "@/components/common/CustomPagination";
 import Header from "@/components/common/Header";
 import Tags from "@/components/common/Tags";
@@ -54,29 +54,36 @@ export default function HomePage() {
     skip: !query.slug,
   });
 
-  const metaData: DefaultSeoProps = !query.slug ? {} : {
-    openGraph: {
-      url: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
-      title: `Pura Vida | ${selectedPost?.getMarketPlacePostBySlug?.name}`,
-      description: selectedPost?.getMarketPlacePostBySlug?.description,
-      images: selectedPost?.getMarketPlacePostBySlug?.imagesUrls?.map(url => ({
-        url: url,
-        width: 800,
-        height: 600,
-        alt: selectedPost?.getMarketPlacePostBySlug?.name,
-      }))
-    },
-    canonical: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
-  }
+  const metaData: DefaultSeoProps = !query.slug
+    ? {}
+    : {
+        openGraph: {
+          url: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+          title: `Pura Vida | ${selectedPost?.getMarketPlacePostBySlug?.name}`,
+          description: selectedPost?.getMarketPlacePostBySlug?.description,
+          images: selectedPost?.getMarketPlacePostBySlug?.imagesUrls?.map(
+            (url) => ({
+              url: url,
+              width: 800,
+              height: 600,
+              alt: selectedPost?.getMarketPlacePostBySlug?.name,
+            })
+          ),
+        },
+        canonical: `${process.env.NEXT_WEBSITE_URL}?slug=${selectedPost?.getMarketPlacePostBySlug?.slug}`,
+      };
 
   return (
     <>
       <NextSeo {...metaData} />
-      <main className="flex flex-col gap-2 md:gap-6">
+      <main className="flex flex-col ">
         <Header postsLoading={postsLoading} />
         <section className="container flex flex-col gap-4 md:gap-6">
-          {/* Tags */}
           <Tags />
+        </section>
+        <section className="container flex flex-col gap-4 md:gap-6">
+          {/* Tags */}
+          {/* <Tags /> */}
           <main className="py-3 flex flex-col gap-4 items-center min-h-[70vh]">
             <section className="flex justify-between w-full md:justify-start gap">
               <h2 className="font-medium text-xl">Latest Posts</h2>
@@ -97,8 +104,7 @@ export default function HomePage() {
                       <Button
                         type="primary"
                         size="large"
-                        onClick={() => setQuery({ text: null }, "replace")}
-                      >
+                        onClick={() => setQuery({ text: null }, "replace")}>
                         Clear Filters
                       </Button>
                     </section>

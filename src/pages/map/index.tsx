@@ -10,11 +10,9 @@ import Tags from "@/components/common/Tags";
 import { useQuery } from "@apollo/client";
 import { SideList } from "@/components/map/SideList";
 import { IPost } from "@/types/IPost";
-import { NextSeo,DefaultSeoProps } from 'next-seo';
-
+import { NextSeo, DefaultSeoProps } from "next-seo";
 
 export default function MapPage() {
-
   const { data: posts, loading: postsLoading } = useQuery<
     GetMarketplacePostsResponse,
     GeFilterMarketplacePostsVariables
@@ -22,7 +20,7 @@ export default function MapPage() {
     variables: {
       filterPostsInput: { all: true },
     },
-    fetchPolicy: 'no-cache',
+    fetchPolicy: "no-cache",
   });
 
   const [center, setCenter] = useState({ lat: 25.12457, lng: 20.12457 });
@@ -32,29 +30,35 @@ export default function MapPage() {
     height: "85vh",
   };
 
-  function handleOnClick(post: IPost) {    
+  function handleOnClick(post: IPost) {
     setActiveCard(post);
-    setCenter({lat: post.location?.coordinates[0] as number,
-      lng: post.location?.coordinates[1] as number,})
+    setCenter({
+      lat: post.location?.coordinates[0] as number,
+      lng: post.location?.coordinates[1] as number,
+    });
   }
 
-
-  const metaData: DefaultSeoProps = posts && posts?.filterMarketplacePosts?.data?.length ? {
-    openGraph: {
-      url: `${process.env.NEXT_WEBSITE_URL}/map`,
-      title: `Pura Vida | map`,
-      description: posts?.filterMarketplacePosts?.data[0]?.description,
-      images: posts?.filterMarketplacePosts?.data[0]?.imagesUrls?.map(url => ({
-        url: url,
-        width: 800,
-        height: 600,
-      }))
-    },
-    canonical: `${process.env.NEXT_WEBSITE_URL}/map`,
-  } : {};
+  const metaData: DefaultSeoProps =
+    posts && posts?.filterMarketplacePosts?.data?.length
+      ? {
+          openGraph: {
+            url: `${process.env.NEXT_WEBSITE_URL}/map`,
+            title: `Pura Vida | map`,
+            description: posts?.filterMarketplacePosts?.data[0]?.description,
+            images: posts?.filterMarketplacePosts?.data[0]?.imagesUrls?.map(
+              (url) => ({
+                url: url,
+                width: 800,
+                height: 600,
+              })
+            ),
+          },
+          canonical: `${process.env.NEXT_WEBSITE_URL}/map`,
+        }
+      : {};
 
   return (
-    <>
+    <div className="h-screen overflow-clip">
       <NextSeo {...metaData} />
       <main className="flex flex-col">
         <Header postsLoading={postsLoading} />
@@ -68,7 +72,7 @@ export default function MapPage() {
               setActiveCard,
               cards: posts?.filterMarketplacePosts.data as IPost[],
             }}
-            sideListTopMargin={163}
+            sideListTopMargin={140}
           />
           <GoogleMap
             mapContainerStyle={containerStyle}
@@ -95,8 +99,7 @@ export default function MapPage() {
                   ],
                 },
               ],
-            }}
-          >
+            }}>
             {posts?.filterMarketplacePosts?.data.map((post) => (
               <Marker
                 key={post._id}
@@ -111,6 +114,6 @@ export default function MapPage() {
           </GoogleMap>
         </section>
       </main>
-    </>
+    </div>
   );
 }

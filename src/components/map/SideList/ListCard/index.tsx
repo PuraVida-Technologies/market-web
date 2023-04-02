@@ -12,11 +12,18 @@ const ListCard = ({
   const { name, location, mainImageUrl, description } = card;
 
   return (
-    <div className={`${styles.listCard} h-[200px]`} onClick={() => setActiveCard(card)}>
+    <div
+      className={`${styles.listCard} h-[120px] min-w-[300px] sm:min-w-[368px] sm:h-[150px]`}
+      onClick={() => setActiveCard(card)}>
       <div className={styles.imageContainer}>
-        <Image src={mainImageUrl} fill alt="card" className="object-cover origin-center rounded-t-lg" />
+        <Image
+          src={mainImageUrl}
+          fill
+          alt="card"
+          className="object-cover origin-center rounded-t-lg"
+        />
       </div>
-      <div className={styles.infoContainer}>
+      <div className={`${styles.infoContainer} overflow-clip`}>
         <h4>{name.slice(0, 20)}</h4>
         <div className={styles.content}>
           <p>{description.slice(0, 100)}</p>
@@ -26,8 +33,7 @@ const ListCard = ({
             <a
               href={`https://maps.google.com/?q=${location.coordinates[0]},${location.coordinates[1]}`}
               target="_blank"
-              rel="noreferrer"
-            >
+              rel="noreferrer">
               <Image
                 src="/assets/icons/send.svg"
                 width={11}

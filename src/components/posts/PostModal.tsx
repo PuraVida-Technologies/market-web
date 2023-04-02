@@ -4,11 +4,24 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Button, Carousel, Modal, ModalProps, Spin } from "antd";
 import Image from "next/image";
 import Link from "next/link";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface PostModalProps extends ModalProps {
   post: IPost;
   loadingPost: boolean;
 }
+
+const settings = {
+  infinite: true,
+  speed: 500,
+  arrows: false,
+  draggable: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  dots: true,
+};
 
 const PostModal = (props: PostModalProps) => {
   const { post, loadingPost } = props;
@@ -44,27 +57,18 @@ const PostModal = (props: PostModalProps) => {
         <Button
           size="small"
           shape="circle"
-          className="grid place-content-center"
-        >
+          className="grid place-content-center">
           <CloseOutlined />
         </Button>
-      }
-    >
+      }>
       {!loadingPost ? (
         <section>
-          <Carousel
-            className="border-b border-gray-light"
-            dots={{
-              className:
-                'bg-white p-1 align-middle w-min mx-auto rounded-lg [&>[class="slick-active"]_button]:bg-primary [&>:not([class="slick-active"])_button]:bg-primary [class="slick-active"]_button]:rounded [&>:not([class="slick-active"])_button]:rounded',
-            }}
-          >
+          <Slider {...settings} className="border-b border-gray-light">
             {post?.imagesUrls?.length && !loadingPost ? (
               post?.imagesUrls?.map((image) => (
                 <div
                   key={image}
-                  className="relative w-full sm:w-[400px] h-[300px] sm:rounded-lg"
-                >
+                  className="relative w-full sm:w-[400px] h-[300px] sm:rounded-lg">
                   <Image
                     alt=""
                     src={image}
@@ -83,7 +87,7 @@ const PostModal = (props: PostModalProps) => {
                 />
               </div>
             )}
-          </Carousel>
+          </Slider>
           <section className="p-6 h-[calc(100%-268px)] flex flex-col gap-6">
             <section className="flex justify-between">
               <section>
@@ -97,8 +101,7 @@ const PostModal = (props: PostModalProps) => {
               <Link
                 href={`https://maps.google.com/?q=${post?.location?.coordinates[0]},${post?.location?.coordinates[1]}`}
                 target="_blank"
-                type="primary"
-              >
+                type="primary">
                 <Button className="flex gap-1 items-center">
                   Location
                   <Image
