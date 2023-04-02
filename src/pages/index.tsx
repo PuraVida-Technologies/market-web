@@ -1,9 +1,12 @@
 import {
   GeFilterMarketplacePostsVariables,
+  GetMarketPlacePostBySlugResponse,
+  GetMarketPlacePostBySlugVariables,
   GetMarketPlacePostResponse,
   GetMarketPlacePostVariables,
   GetMarketplacePostsResponse,
   POSTS_LIMIT,
+  getMarketPlacePostBySlugQuery,
   getMarketPlacePostQuery,
   getMarketplacePostsQuery,
 } from "@/apollo/posts.service";
@@ -29,7 +32,7 @@ export default function HomePage() {
     text: withDefault(StringParam, null),
     page: withDefault(NumberParam, 1),
     tags: withDefault(ArrayParam, []),
-    selectedPostId: StringParam,
+    slug: StringParam,
   });
 
   const { data: posts, loading: postsLoading } = useQuery<
@@ -47,11 +50,11 @@ export default function HomePage() {
   });
 
   const { data: selectedPost, loading: loadingSelectedPost } = useQuery<
-    GetMarketPlacePostResponse,
-    GetMarketPlacePostVariables
-  >(getMarketPlacePostQuery, {
-    variables: { postId: query.selectedPostId as string },
-    skip: !query.selectedPostId,
+    GetMarketPlacePostBySlugResponse,
+    GetMarketPlacePostBySlugVariables
+  >(getMarketPlacePostBySlugQuery, {
+    variables: { slug: query.slug as string },
+    skip: !query.slug,
   });
 
   return (
@@ -95,7 +98,7 @@ export default function HomePage() {
                 <PostCard
                   post={post}
                   key={post._id}
-                  onClick={() => setQuery({ selectedPostId: post._id })}
+                  onClick={() => setQuery({ slug: post.slug })}
                 />
               ))}
             </ul>
@@ -111,9 +114,9 @@ export default function HomePage() {
         </section>
       </main>
       <PostModal
-        open={!!query.selectedPostId}
-        post={selectedPost?.getMarketPlacePost as IPost}
-        onCancel={() => setQuery({ selectedPostId: null })}
+        open={!!query.slug}
+        post={selectedPost?.getMarketPlacePostBySlug as IPost}
+        onCancel={() => setQuery({ slug: null })}
         loadingPost={loadingSelectedPost}
       />
     </>

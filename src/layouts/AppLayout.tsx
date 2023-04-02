@@ -78,7 +78,7 @@ const AppLayout = ({ children, className }: AppLayoutProps) => {
             <Header>
               <title>PuraVida</title>
               <meta name="description" content="PuraVida" />
-              <link rel="icon" href="/assets/Logo.png" />
+              <link rel="icon" href="/assets/logo.png" />
             </Header>
             <AntThemeProvider>{children}</AntThemeProvider>
             {ButtonViewMap[view as string]}

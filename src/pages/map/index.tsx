@@ -19,7 +19,7 @@ export default function MapPage() {
     GeFilterMarketplacePostsVariables
   >(getMarketplacePostsQuery, {
     variables: {
-      filterPostsInput: { limit: POSTS_LIMIT },
+      filterPostsInput: { all: true },
     },
     fetchPolicy: 'no-cache',
   });

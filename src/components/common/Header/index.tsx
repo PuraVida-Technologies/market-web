@@ -27,7 +27,7 @@ const Header = ({ postsLoading }: IHeaderOptions) => {
           <Link href="/" className="text-black flex items-center">
             <Image
               alt=""
-              src={"/assets/Logo.svg"}
+              src={"/assets/logo.svg"}
               width={40}
               height={40}
               className="object-contain object-center"

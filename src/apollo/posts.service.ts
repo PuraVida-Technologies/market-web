@@ -13,6 +13,7 @@ export interface FilterMarketplacePostsInput {
   sortBy?: string;
   tagsSlugs?: string[];
   text?: string;
+  all?: boolean;
 }
 
 export interface GeFilterMarketplacePostsVariables {
@@ -37,6 +38,7 @@ export const getMarketplacePostsQuery = gql`
         description
         mainImageUrl
         imagesUrls
+        slug
         location {
           coordinates
         }
@@ -58,8 +60,15 @@ export interface GetMarketPlacePostVariables {
   postId: string;
 }
 
+export interface GetMarketPlacePostBySlugVariables {
+  slug: string;
+}
+
 export interface GetMarketPlacePostResponse {
   getMarketPlacePost: IPost;
+}
+export interface GetMarketPlacePostBySlugResponse {
+  getMarketPlacePostBySlug: IPost;
 }
 
 export const getMarketPlacePostQuery = gql`
@@ -95,3 +104,36 @@ export const getMarketPlacePostQuery = gql`
   }
 `;
 //#endregion
+
+export const getMarketPlacePostBySlugQuery = gql`
+  query GetMarketPlacePostBySlug($slug: String!) {
+    getMarketPlacePostBySlug(slug: $slug) {
+      _id
+      address
+      createdAt
+      description
+      imagesUrls
+      location {
+        coordinates
+      }
+      mainImageUrl
+      name
+      openHours
+      owner {
+        email
+        phoneNumber
+      }
+      rating
+      slug
+      status
+      tags {
+        name
+        icon
+        slug
+        status
+        _id
+      }
+      userId
+    }
+  }
+`;
