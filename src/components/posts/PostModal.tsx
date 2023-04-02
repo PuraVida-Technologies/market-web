@@ -3,6 +3,7 @@ import useWindowSize from '@/utils/hooks/useWindowSize';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button, Carousel, Modal, ModalProps, Spin } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface PostModalProps extends ModalProps {
   post: IPost;
@@ -94,10 +95,13 @@ const PostModal = (props: PostModalProps) => {
                 {post?.address}
               </p>
             </section>
-            <Button type="primary" className="flex gap-1 items-center">
+            <Link href={`https://maps.google.com/?q=${post?.location?.coordinates[0]},${post?.location?.coordinates[1]}`} 
+            target='_blank' type="primary" >
+            <Button className="flex gap-1 items-center">
               Location
               <Image width={18} height={18} alt="" src="/assets/location.svg" />
-            </Button>
+              </Button>
+            </Link>
           </section>
           <section className="flex flex-col gap-3">
             <h2 className="font-medium">Description</h2>
