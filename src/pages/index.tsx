@@ -44,6 +44,7 @@ export default function HomePage() {
         tagsSlugs: query.tags as string[],
         page: query.page,
         text: query.text as string,
+        all: false
       },
     },
   });
