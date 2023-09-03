@@ -1,4 +1,3 @@
-import { forwardRef, LegacyRef } from "react";
 import { Button } from "antd";
 import {
   ArrayParam,
@@ -14,7 +13,7 @@ import {
   getMarketplaceTagsQuery,
 } from "@/apollo/tags.service";
 
-const Tags = () => {
+export function Tags() {
   const [query, setQuery] = useQueryParams({
     text: withDefault(StringParam, null),
     page: withDefault(NumberParam, 1),
@@ -70,4 +69,3 @@ const Tags = () => {
   );
 };
 
-export default Tags;

@@ -2,13 +2,13 @@ import { IPost } from "@/types/IPost";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
-const ListCard = ({
-  card,
-  setActiveCard,
-}: {
+type ListCardProps = {
   card: IPost;
   setActiveCard: (card: IPost) => void;
-}) => {
+}
+const ListCard = (listCardProps: ListCardProps) => {
+  const { card, setActiveCard } = listCardProps;
+  
   const { name, location, mainImageUrl, description } = card;
 
   return (
