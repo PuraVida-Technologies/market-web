@@ -48,13 +48,7 @@ export const SideList = (sideListProps: SideListProps) => {
                 <Spin className="w-full h-60 grid place-content-center" />
               ) : null}
 
-              {!isLoading && cards?.length ? cards?.map((card, i) => (
-                <ListCard
-                  key={`${card.address}-${i}`}
-                  card={card}
-                  setActiveCard={setActiveCard}
-                />
-              )) : (
+              {!isLoading && !cards?.length ? (
                 <Button
                   type={"default"}
                   onClick={() =>
@@ -64,7 +58,13 @@ export const SideList = (sideListProps: SideListProps) => {
                 >
                   Clear Filter
                 </Button>
-              )}
+              ) : cards?.map((card, i) => (
+                <ListCard
+                  key={`${card.address}-${i}`}
+                  card={card}
+                  setActiveCard={setActiveCard}
+                />
+              ))}
             </div>
           </div>
         )}
