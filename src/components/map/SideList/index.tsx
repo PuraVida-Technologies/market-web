@@ -49,15 +49,17 @@ export const SideList = (sideListProps: SideListProps) => {
               ) : null}
 
               {!isLoading && !cards?.length ? (
-                <Button
-                  type={"default"}
-                  onClick={() =>
-                    setQuery({ tags: null as unknown as string[] }, "replace")
-                  }
-                  className="max-w-min"
-                >
-                  Clear Filter
-                </Button>
+                  <div className="flex justify-center">
+                    <Button
+                      type={"default"}
+                      onClick={() =>
+                        setQuery({ tags: null as unknown as string[] }, "replace")
+                      }
+                      className="max-w-min absolute top-1/2"
+                    >
+                      Clear Filter
+                    </Button>
+                  </div>
               ) : cards?.map((card, i) => (
                 <ListCard
                   key={`${card.address}-${i}`}
