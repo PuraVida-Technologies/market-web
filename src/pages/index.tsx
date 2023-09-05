@@ -10,7 +10,7 @@ import {
 import { NextSeo, DefaultSeoProps } from "next-seo";
 import CustomPagination from "@/components/common/CustomPagination";
 import Header from "@/components/common/Header";
-import Tags from "@/components/common/Tags";
+import { Tags } from "@/components/common/Tags";
 import PostCard from "@/components/posts/PostCard";
 import PostModal from "@/components/posts/PostModal";
 import { IPost } from "@/types/IPost";

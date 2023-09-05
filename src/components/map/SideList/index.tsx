@@ -2,24 +2,38 @@ import styles from "./styles.module.scss";
 import ListCard from "./ListCard";
 import SingleCard from "./SingleCard";
 import { IPost } from "@/types/IPost";
+import { Button, Spin } from "antd";
+import { ArrayParam, NumberParam, StringParam, useQueryParams, withDefault } from "use-query-params";
 
-export const SideList = ({
-  activeCard,
-  setActiveCard,
-  cards,
-  sideListTopMargin,
-}: {
+type SideListProps = {
   activeCard: IPost | null;
   setActiveCard: (card: IPost | null) => void;
   cards: IPost[];
   sideListTopMargin: number;
-}) => {
+  isLoading: boolean;
+}
+
+export const SideList = (sideListProps: SideListProps) => {
+  const {
+    activeCard,
+    setActiveCard,
+    cards,
+    sideListTopMargin,
+    isLoading
+  } = sideListProps;
+
+  const [query, setQuery] = useQueryParams({
+    text: withDefault(StringParam, null),
+    page: withDefault(NumberParam, 1),
+    tags: withDefault(ArrayParam, []),
+    selectedPostId: StringParam,
+  });
+
   return (
     <>
       <div
-        className={`${styles.sideList} ${
-          activeCard && styles.noBorderPadding
-        } h-[77vh] `}
+        className={`${styles.sideList} ${activeCard && styles.noBorderPadding
+          } h-[77vh] `}
         style={{ top: `${sideListTopMargin}px ` }}>
         {activeCard ? (
           <SingleCard {...{ activeCard, setActiveCard }} />
@@ -30,36 +44,33 @@ export const SideList = ({
               <div className={styles.location}></div>
             </div>
             <div className={styles.sideCardsContainer}>
-              {cards?.map((card, i) => (
+              {isLoading ? (
+                <Spin className="w-full h-60 grid place-content-center" />
+              ) : null}
+
+              {!isLoading && !cards?.length ? (
+                  <div className="flex justify-center">
+                    <Button
+                      type={"default"}
+                      onClick={() =>
+                        setQuery({ tags: null as unknown as string[] }, "replace")
+                      }
+                      className="max-w-min absolute top-1/2"
+                    >
+                      Clear Filter
+                    </Button>
+                  </div>
+              ) : cards?.map((card, i) => (
                 <ListCard
                   key={`${card.address}-${i}`}
-                  {...{ card, setActiveCard }}
+                  card={card}
+                  setActiveCard={setActiveCard}
                 />
               ))}
             </div>
           </div>
         )}
       </div>
-      {activeCard ? (
-        <div
-          className={`${styles.sideList} ${
-            activeCard && styles.noBorderPadding
-          } ${styles.mobileSingleCard}`}
-          style={{ top: `${0}px` }}>
-          <SingleCard {...{ activeCard, setActiveCard }} />
-        </div>
-      ) : (
-        <div className={`bottomSliderList ${styles.bottomSliderList}`}>
-          <div className="flex gap-3 overflow-x-auto px-3">
-            {cards?.map((card, i) => (
-              <ListCard
-                key={`${card.address}-${i}`}
-                {...{ card, setActiveCard }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
     </>
   );
 };

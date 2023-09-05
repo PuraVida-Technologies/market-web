@@ -1,7 +1,7 @@
 import { IPost } from "@/types/IPost";
 import useWindowSize from "@/utils/hooks/useWindowSize";
 import { CloseOutlined } from "@ant-design/icons";
-import { Button, Carousel, Modal, ModalProps, Spin } from "antd";
+import { Button, Modal, ModalProps, Spin } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";

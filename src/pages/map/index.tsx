@@ -6,22 +6,34 @@ import {
   GeFilterMarketplacePostsVariables,
 } from "@/apollo/posts.service";
 import Header from "@/components/common/Header";
-import Tags from "@/components/common/Tags";
+import { Tags } from "@/components/common/Tags";
 import { useQuery } from "@apollo/client";
 import { SideList } from "@/components/map/SideList";
 import { IPost } from "@/types/IPost";
 import { NextSeo, DefaultSeoProps } from "next-seo";
 import config from "@/config/environments";
 import { GetServerSideProps } from "next/types";
+import { ArrayParam, NumberParam, StringParam, useQueryParams, withDefault } from "use-query-params";
 
 
 export default function MapPage() {
+  const [query] = useQueryParams({
+    text: withDefault(StringParam, null),
+    page: withDefault(NumberParam, 1),
+    tags: withDefault(ArrayParam, []),
+  });
+
   const { data: posts, loading: postsLoading } = useQuery<
     GetMarketplacePostsResponse,
     GeFilterMarketplacePostsVariables
   >(getMarketplacePostsQuery, {
     variables: {
-      filterPostsInput: { all: true },
+      filterPostsInput: {
+        all: true,
+        tagsSlugs: query.tags as string[],
+        page: query.page,
+        text: query.text as string,
+      },
     },
     fetchPolicy: "no-cache",
   });
@@ -44,20 +56,20 @@ export default function MapPage() {
   const metaData: DefaultSeoProps =
     posts && posts?.filterMarketplacePosts?.data?.length
       ? {
-          openGraph: {
-            url: `${config.marketFrontendUrl}/map`,
-            title: `Pura Vida | map`,
-            description: posts?.filterMarketplacePosts?.data[0]?.description,
-            images: posts?.filterMarketplacePosts?.data[0]?.imagesUrls?.map(
-              (url) => ({
-                url: url,
-                width: 800,
-                height: 600,
-              })
-            ),
-          },
-          canonical: `${config.marketFrontendUrl}/map`,
-        }
+        openGraph: {
+          url: `${config.marketFrontendUrl}/map`,
+          title: `Pura Vida | map`,
+          description: posts?.filterMarketplacePosts?.data[0]?.description,
+          images: posts?.filterMarketplacePosts?.data[0]?.imagesUrls?.map(
+            (url) => ({
+              url: url,
+              width: 800,
+              height: 600,
+            })
+          ),
+        },
+        canonical: `${config.marketFrontendUrl}/map`,
+      }
       : {};
 
   return (
@@ -76,6 +88,7 @@ export default function MapPage() {
               cards: posts?.filterMarketplacePosts.data as IPost[],
             }}
             sideListTopMargin={140}
+            isLoading={postsLoading}
           />
           <GoogleMap
             mapContainerStyle={containerStyle}
